@@ -1,0 +1,17 @@
+#pragma once
+
+// Basis shortcuts (simpele modifier + toets)
+#define Copy      LG(C)            // Cmd + C
+#define Paste     LG(V)            // Cmd + V
+#define Cut       LG(X)            // Cmd + X
+#define Undo      LG(Z)            // Cmd + Z
+#define Redo      LG(Y)            // Cmd + Y
+
+// Navigatie
+#define wrdlf     LA(LEFT)         // Option + Links
+#define wrdrt     LA(RIGHT)        // Option + Rechts
+#define prev      LG(LEFT)         // Cmd + Links
+#define next      LG(RIGHT)        // Cmd + Rechts
+
+// Symbolen
+#define euro      LA(N2)           // Option + 2

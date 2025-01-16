@@ -1,0 +1,5 @@
+config SHIELD_ZO_MOOI_LEFT
+    def_bool $(shields_list_contains,zo_mooi_left)
+
+config SHIELD_ZO_MOOI_RIGHT
+    def_bool $(shields_list_contains,zo_mooi_right) 

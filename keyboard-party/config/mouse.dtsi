@@ -1,0 +1,14 @@
+#pragma once
+
+// Constante snelheid voor muis bewegingen
+&mmv {  // Muis beweging
+    time-to-max-speed-ms = <0>;     // Direct max snelheid
+    acceleration-exponent = <0>;     // Geen acceleratie
+    delay-ms = <0>;                 // Geen vertraging
+};
+
+&msc {  // Muis scroll
+    time-to-max-speed-ms = <0>;     // Direct max snelheid
+    acceleration-exponent = <0>;     // Geen acceleratie
+    delay-ms = <0>;                 // Geen vertraging
+}; 

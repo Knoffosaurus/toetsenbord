@@ -1,0 +1,313 @@
+#pragma once
+
+/ {
+    behaviors {
+        // Hold-tap voor layer switching
+        lt: layer_tap {
+            compatible = "zmk,behavior-hold-tap";
+            label = "LAYER_TAP";
+            #binding-cells = <2>;
+            tapping-term-ms = <200>;
+            quick-tap-ms = <150>;
+            flavor = "tap-preferred";
+            bindings = <&mo>, <&kp>;
+        };
+
+        // Hold-tap voor Command shortcuts
+        cmd: command_tap {
+            compatible = "zmk,behavior-hold-tap";
+            label = "COMMAND_TAP";
+            #binding-cells = <2>;
+            tapping-term-ms = <200>;
+            quick-tap-ms = <150>;
+            flavor = "hold-preferred";          // Prioriteit aan command functie
+            bindings = <&kp>, <&kp>;
+        };
+
+        // Sticky shift met korte timeout
+        ss: sticky_shift {
+            compatible = "zmk,behavior-sticky-key";
+            label = "STICKY_SHIFT";
+            #binding-cells = <1>;
+            bindings = <&kp>;
+            release-after-ms = <1000>;
+            quick-release;                      // Release na volgende toets
+        };
+
+        // Caps-word met extra symbolen voor code
+        cw: caps_word {
+            compatible = "zmk,behavior-caps-word";
+            label = "CAPS_WORD";
+            #binding-cells = <0>;
+            continue-list = <UNDERSCORE MINUS BSPC DEL>;  // Handige symbolen voor code
+        };
+
+        // Num-word voor getallen
+        nw: num_word {
+            compatible = "zmk,behavior-caps-word";
+            label = "NUM_WORD";
+            #binding-cells = <0>;
+            continue-list = <N0 N1 N2 N3 N4 N5 N6 N7 N8 N9 DOT COMMA MINUS PLUS STAR FSLH EQUAL>;
+        };
+
+        // Tap-dance voor layer toggle
+        td_layer: tap_dance_layer {
+            compatible = "zmk,behavior-tap-dance";
+            label = "TAP_DANCE_LAYER";
+            #binding-cells = <0>;
+            tapping-term-ms = <200>;
+            bindings = <&mo NUM>, <&tog SYM>;   // 1x = momentary NUM, 2x = toggle SYM
+        };
+
+        // Haakjes met/zonder shift
+        brackets: brackets {
+            compatible = "zmk,behavior-mod-morph";
+            label = "BRACKETS";
+            #binding-cells = <0>;
+            bindings = <&kp LPAR>, <&kp RPAR>;  // Zonder shift (, met shift )
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+        };
+
+        // Hold-tap voor muis bewegingen (tap = langzaam, hold = snel)
+        mht_l: mouse_hold_tap_left {
+            compatible = "zmk,behavior-hold-tap";
+            label = "MOUSE_HOLD_TAP_LEFT";
+            #binding-cells = <2>;
+            tapping-term-ms = <200>;
+            quick-tap-ms = <150>;
+            flavor = "tap-preferred";
+            bindings = <&mmove_fast_l>, <&mmove_slow_l>;
+        };
+
+        mht_r: mouse_hold_tap_right {
+            compatible = "zmk,behavior-hold-tap";
+            label = "MOUSE_HOLD_TAP_RIGHT";
+            #binding-cells = <2>;
+            tapping-term-ms = <200>;
+            quick-tap-ms = <150>;
+            flavor = "tap-preferred";
+            bindings = <&mmove_fast_r>, <&mmove_slow_r>;
+        };
+
+        mht_u: mouse_hold_tap_up {
+            compatible = "zmk,behavior-hold-tap";
+            label = "MOUSE_HOLD_TAP_UP";
+            #binding-cells = <2>;
+            tapping-term-ms = <200>;
+            quick-tap-ms = <150>;
+            flavor = "tap-preferred";
+            bindings = <&mmove_fast_u>, <&mmove_slow_u>;
+        };
+
+        mht_d: mouse_hold_tap_down {
+            compatible = "zmk,behavior-hold-tap";
+            label = "MOUSE_HOLD_TAP_DOWN";
+            #binding-cells = <2>;
+            tapping-term-ms = <200>;
+            quick-tap-ms = <150>;
+            flavor = "tap-preferred";
+            bindings = <&mmove_fast_d>, <&mmove_slow_d>;
+        };
+
+        // Snelle muis bewegingen per richting
+        mmove_fast_l: mouse_move_fast_left {
+            compatible = "zmk,behavior-mouse-move";
+            label = "MOUSE_MOVE_FAST_LEFT";
+            #binding-cells = <2>;
+            delay-ms = <0>;
+            time-to-max-speed-ms = <0>;
+            acceleration-exponent = <0>;
+            bindings = <&mmv>;
+            x-movement-speed = <-1500>;  // Links
+            y-movement-speed = <0>;
+        };
+
+        mmove_fast_r: mouse_move_fast_right {
+            compatible = "zmk,behavior-mouse-move";
+            label = "MOUSE_MOVE_FAST_RIGHT";
+            #binding-cells = <2>;
+            delay-ms = <0>;
+            time-to-max-speed-ms = <0>;
+            acceleration-exponent = <0>;
+            bindings = <&mmv>;
+            x-movement-speed = <1500>;   // Rechts
+            y-movement-speed = <0>;
+        };
+
+        mmove_fast_u: mouse_move_fast_up {
+            compatible = "zmk,behavior-mouse-move";
+            label = "MOUSE_MOVE_FAST_UP";
+            #binding-cells = <2>;
+            delay-ms = <0>;
+            time-to-max-speed-ms = <0>;
+            acceleration-exponent = <0>;
+            bindings = <&mmv>;
+            x-movement-speed = <0>;
+            y-movement-speed = <-1500>;  // Omhoog
+        };
+
+        mmove_fast_d: mouse_move_fast_down {
+            compatible = "zmk,behavior-mouse-move";
+            label = "MOUSE_MOVE_FAST_DOWN";
+            #binding-cells = <2>;
+            delay-ms = <0>;
+            time-to-max-speed-ms = <0>;
+            acceleration-exponent = <0>;
+            bindings = <&mmv>;
+            x-movement-speed = <0>;
+            y-movement-speed = <1500>;   // Omlaag
+        };
+
+        // Langzame muis bewegingen per richting
+        mmove_slow_l: mouse_move_slow_left {
+            compatible = "zmk,behavior-mouse-move";
+            label = "MOUSE_MOVE_SLOW_LEFT";
+            #binding-cells = <2>;
+            delay-ms = <0>;
+            time-to-max-speed-ms = <0>;
+            acceleration-exponent = <0>;
+            bindings = <&mmv>;
+            x-movement-speed = <-300>;   // Links
+            y-movement-speed = <0>;
+        };
+
+        mmove_slow_r: mouse_move_slow_right {
+            compatible = "zmk,behavior-mouse-move";
+            label = "MOUSE_MOVE_SLOW_RIGHT";
+            #binding-cells = <2>;
+            delay-ms = <0>;
+            time-to-max-speed-ms = <0>;
+            acceleration-exponent = <0>;
+            bindings = <&mmv>;
+            x-movement-speed = <300>;    // Rechts
+            y-movement-speed = <0>;
+        };
+
+        mmove_slow_u: mouse_move_slow_up {
+            compatible = "zmk,behavior-mouse-move";
+            label = "MOUSE_MOVE_SLOW_UP";
+            #binding-cells = <2>;
+            delay-ms = <0>;
+            time-to-max-speed-ms = <0>;
+            acceleration-exponent = <0>;
+            bindings = <&mmv>;
+            x-movement-speed = <0>;
+            y-movement-speed = <-300>;   // Omhoog
+        };
+
+        mmove_slow_d: mouse_move_slow_down {
+            compatible = "zmk,behavior-mouse-move";
+            label = "MOUSE_MOVE_SLOW_DOWN";
+            #binding-cells = <2>;
+            delay-ms = <0>;
+            time-to-max-speed-ms = <0>;
+            acceleration-exponent = <0>;
+            bindings = <&mmv>;
+            x-movement-speed = <0>;
+            y-movement-speed = <300>;    // Omlaag
+        };
+
+        // Hold-tap voor scrollen (tap = langzaam, hold = snel)
+        sht: scroll_hold_tap {
+            compatible = "zmk,behavior-hold-tap";
+            label = "SCROLL_HOLD_TAP";
+            #binding-cells = <2>;
+            tapping-term-ms = <200>;
+            quick-tap-ms = <150>;
+            flavor = "tap-preferred";
+            bindings = <&mscrl_fast>, <&mscrl_slow>;
+        };
+
+        // Snelle scroll beweging
+        mscrl_fast: mouse_scroll_fast {
+            compatible = "zmk,behavior-mouse-scroll";
+            label = "MOUSE_SCROLL_FAST";
+            #binding-cells = <2>;
+            delay-ms = <0>;
+            time-to-max-speed-ms = <0>;
+            acceleration-exponent = <0>;
+            bindings = <&msc>;
+            scroll-speed = <30>;     // Snel scrollen
+        };
+
+        // Langzame scroll beweging
+        mscrl_slow: mouse_scroll_slow {
+            compatible = "zmk,behavior-mouse-scroll";
+            label = "MOUSE_SCROLL_SLOW";
+            #binding-cells = <2>;
+            delay-ms = <0>;
+            time-to-max-speed-ms = <0>;
+            acceleration-exponent = <0>;
+            bindings = <&msc>;
+            scroll-speed = <5>;      // Langzaam scrollen
+        };
+
+        // Hold-tap voor scrollen omhoog (tap = langzaam, hold = snel)
+        sht_u: scroll_hold_tap_up {
+            compatible = "zmk,behavior-hold-tap";
+            label = "SCROLL_HOLD_TAP_UP";
+            #binding-cells = <2>;
+            tapping-term-ms = <200>;
+            quick-tap-ms = <150>;
+            flavor = "tap-preferred";
+            bindings = <&mscrl_fast_u>, <&mscrl_slow_u>;
+        };
+
+        // Hold-tap voor scrollen omlaag (tap = langzaam, hold = snel)
+        sht_d: scroll_hold_tap_down {
+            compatible = "zmk,behavior-hold-tap";
+            label = "SCROLL_HOLD_TAP_DOWN";
+            #binding-cells = <2>;
+            tapping-term-ms = <200>;
+            quick-tap-ms = <150>;
+            flavor = "tap-preferred";
+            bindings = <&mscrl_fast_d>, <&mscrl_slow_d>;
+        };
+
+        // Snelle scroll bewegingen per richting
+        mscrl_fast_u: mouse_scroll_fast_up {
+            compatible = "zmk,behavior-mouse-scroll";
+            label = "MOUSE_SCROLL_FAST_UP";
+            #binding-cells = <2>;
+            delay-ms = <0>;
+            time-to-max-speed-ms = <0>;
+            acceleration-exponent = <0>;
+            bindings = <&msc>;
+            scroll-speed = <-30>;    // Snel omhoog scrollen
+        };
+
+        mscrl_fast_d: mouse_scroll_fast_down {
+            compatible = "zmk,behavior-mouse-scroll";
+            label = "MOUSE_SCROLL_FAST_DOWN";
+            #binding-cells = <2>;
+            delay-ms = <0>;
+            time-to-max-speed-ms = <0>;
+            acceleration-exponent = <0>;
+            bindings = <&msc>;
+            scroll-speed = <30>;     // Snel omlaag scrollen
+        };
+
+        // Langzame scroll bewegingen per richting
+        mscrl_slow_u: mouse_scroll_slow_up {
+            compatible = "zmk,behavior-mouse-scroll";
+            label = "MOUSE_SCROLL_SLOW_UP";
+            #binding-cells = <2>;
+            delay-ms = <0>;
+            time-to-max-speed-ms = <0>;
+            acceleration-exponent = <0>;
+            bindings = <&msc>;
+            scroll-speed = <-5>;     // Langzaam omhoog scrollen
+        };
+
+        mscrl_slow_d: mouse_scroll_slow_down {
+            compatible = "zmk,behavior-mouse-scroll";
+            label = "MOUSE_SCROLL_SLOW_DOWN";
+            #binding-cells = <2>;
+            delay-ms = <0>;
+            time-to-max-speed-ms = <0>;
+            acceleration-exponent = <0>;
+            bindings = <&msc>;
+            scroll-speed = <5>;      // Langzaam omlaag scrollen
+        };
+    };
+};

@@ -1,0 +1,11 @@
+# Build artifacts
+.zmk/
+.west/
+build/
+
+# Generated files
+*.uf2
+.DS_Store
+
+# Private keymap files
+config/zo_mooi.keymap

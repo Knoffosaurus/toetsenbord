@@ -1,0 +1,14 @@
+draw_config:
+  key_w: 60  # Toetsbreedte
+  key_h: 60  # Toetshoogte
+  split_gap: 30  # Ruimte tussen splits
+  key_rx: 6  # Hoekradius van toetsen
+  key_ry: 6
+  
+  font_size: 14  # Tekstgrootte
+  font_family: "Arial"
+  
+  # Kleuren
+  fill_color: "#ffffff"
+  stroke_color: "#000000"
+  text_color: "#000000" 
