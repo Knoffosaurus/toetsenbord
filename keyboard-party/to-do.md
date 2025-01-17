@@ -1,5 +1,9 @@
 # To-Do List
 
+## Build fixen
+- [ ] build.yml aanpassen naar juiste paths & config
+- [ ] draw aanpassen naar juiste paths & config 
+
 ## Configuratie Bestanden
 - [x] Basic key labels
 - [ ] Custom behaviors
