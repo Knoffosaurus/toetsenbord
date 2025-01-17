@@ -2,10 +2,32 @@
 .zmk/
 .west/
 build/
+*.uf2
 
 # Generated files
-*.uf2
 .DS_Store
+img/
 
-# Private keymap files
+# Private config files
 config/
+
+# Python virtual environment
+.venv/
+__pycache__/
+*.pyc
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*~
+
+# Temporary files
+*.tmp
+*.bak
+*.log
+
+# ZMK specific
+.config
+*.dtb
+*.dts.pre.tmp
