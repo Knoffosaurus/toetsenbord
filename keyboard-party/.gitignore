@@ -8,5 +8,4 @@ build/
 .DS_Store
 
 # Private keymap files
-config/zo_mooi.keymap
-config/base.keymap
+config/
